@@ -1,0 +1,18 @@
+.flight-search-tabs {
+  overflow-x: auto;
+  justify-content: flex-start;
+}
+
+.flight-search-tab--show-more {
+  display: none;
+}
+
+.flight-search-tab {
+  flex: 0 0 auto;
+  width: 120px;
+  border-bottom: 1px solid #fff;
+  position: initial;
+}
+.flight-search-tab:last-child {
+  border-bottom: 1px solid #fff;
+}
