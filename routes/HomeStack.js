@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import Home from '../screens/Home';
@@ -10,7 +11,8 @@ const screens = {
     screen: Home,
     navigationOptions: ({ navigation }) => {
       return {
-        headerTitle: () => <Header navigation={navigation} title='GameZone' />
+        headerTitle: () => <Header navigation={navigation} title='GameZone' />,
+        headerBackground: () => <Image source={require('../assets/game_bg.png')} style={{height:60}}/>
       }
     }
   },
@@ -27,7 +29,7 @@ const HomeStack = createStackNavigator(screens, {
     headerTintColor: '#444',
     headerStyle: {
       backgroundColor: '#eee',
-      height: 80
+      height: 60
     }
   }
 });

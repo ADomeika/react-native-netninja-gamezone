@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
-import Card from '../shared/Card';
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Modal
+} from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
+import Card from '../shared/Card';
 import { globalStyles } from '../styles/global';
+import ReviewForm from './ReviewForm';
 
 export default Home = ({ navigation }) => {
+  const [modalOpen, setModalOpen] = useState(false)
   const [reviews, setReviews] = useState([
     { title: 'Zelda, Breath of Fresh Air', rating: 5, body: 'lorem ipsum', key: '1' },
     { title: 'Gotta Catch Em All (Again)', rating: 4, body: 'lorem ipsum', key: '2' },
@@ -13,6 +23,25 @@ export default Home = ({ navigation }) => {
 
   return (
     <View style={globalStyles.container}>
+      <Modal visible={modalOpen} animationType='slide'>
+        <View style={styles.modalContent}>
+          <MaterialIcons
+            name='close'
+            size={24}
+            onPress={() => setModalOpen(false)}
+            style={{ ...styles.modalToggle, ...styles.modalClose }}
+          />
+          <ReviewForm />
+        </View>
+      </Modal>
+
+      <MaterialIcons
+        name='add'
+        size={24}
+        onPress={() => setModalOpen(true)}
+        style={styles.modalToggle}
+      />
+
       <FlatList
         data={reviews}
         renderItem={({ item }) => (
@@ -26,3 +55,21 @@ export default Home = ({ navigation }) => {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  modalToggle: {
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#f2f2f2',
+    borderRadius: 10,
+    padding: 10,
+    alignSelf: 'center'
+  },
+  modalClose: {
+    marginTop: 20,
+    marginBottom: 0
+  },
+  modalContent: {
+    flex: 1
+  }
+})
